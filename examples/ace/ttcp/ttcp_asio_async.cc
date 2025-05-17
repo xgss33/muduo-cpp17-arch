@@ -22,10 +22,10 @@ class TtcpServerConnection : public std::enable_shared_from_this<TtcpServerConne
 {
  public:
 #if BOOST_VERSION < 107000L
-  TtcpServerConnection(boost::asio::io_service& io_service)
+  TtcpServerConnection(boost::asio::io_context& io_service)
     : socket_(io_service), count_(0), payload_(NULL), ack_(0)
 #else
-  TtcpServerConnection(const boost::asio::executor& executor)
+  TtcpServerConnection(boost::asio::any_io_executor executor)
     : socket_(executor), count_(0), payload_(NULL), ack_(0)
 #endif
   {
@@ -170,7 +170,7 @@ void receive(const Options& opt)
 {
   try
   {
-    boost::asio::io_service io_service;
+    boost::asio::io_context io_service;
     tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), opt.port));
     doAccept(acceptor);
     io_service.run();

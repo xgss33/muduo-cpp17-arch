@@ -21,7 +21,7 @@ void receive(const Options& opt)
 {
   try
   {
-    boost::asio::io_service io_service;
+    boost::asio::io_context io_service;
     tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), opt.port));
     tcp::socket socket(io_service);
     acceptor.accept(socket);

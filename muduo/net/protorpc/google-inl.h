@@ -37,6 +37,8 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <google/protobuf/message.h>
+#include <absl/log/log.h>
+#include <absl/log/check.h>
 
 // When serializing, we first compute the byte size, then serialize the message.
 // If serialization produces a different number of bytes than expected, we
@@ -49,13 +51,13 @@ void ByteSizeConsistencyError(int byte_size_before_serialization,
                               int byte_size_after_serialization,
                               int bytes_produced_by_serialization)
 {
-  GOOGLE_CHECK_EQ(byte_size_before_serialization, byte_size_after_serialization)
+  ABSL_CHECK_EQ(byte_size_before_serialization, byte_size_after_serialization)
       << "Protocol message was modified concurrently during serialization.";
-  GOOGLE_CHECK_EQ(bytes_produced_by_serialization, byte_size_before_serialization)
+  ABSL_CHECK_EQ(bytes_produced_by_serialization, byte_size_before_serialization)
       << "Byte size calculation and serialization were inconsistent.  This "
          "may indicate a bug in protocol buffers or it may be caused by "
          "concurrent modification of the message.";
-  GOOGLE_LOG(FATAL) << "This shouldn't be called if all the sizes are equal.";
+  ABSL_LOG(FATAL) << "This shouldn't be called if all the sizes are equal.";
 }
 
 inline

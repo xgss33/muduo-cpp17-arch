@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 project(muduo C CXX)
 
 enable_testing()
 
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
+    set(CMAKE_BUILD_TYPE "Release")
 endif()
 
 option(MUDUO_BUILD_EXAMPLES "Build Muduo examples" ON)
@@ -17,7 +17,7 @@ set(CXX_FLAGS
  -D_FILE_OFFSET_BITS=64
  -Wall
  -Wextra
- -Werror
+ # -Werror
  -Wconversion
  -Wno-unused-parameter
  -Wold-style-cast

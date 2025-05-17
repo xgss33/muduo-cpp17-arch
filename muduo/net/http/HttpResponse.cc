@@ -17,7 +17,7 @@ using namespace muduo::net;
 
 void HttpResponse::appendToBuffer(Buffer* output) const
 {
-  char buf[32];
+  char buf[64];
   snprintf(buf, sizeof buf, "HTTP/1.1 %d ", statusCode_);
   output->append(buf);
   output->append(statusMessage_);

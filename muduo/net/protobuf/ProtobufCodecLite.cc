@@ -16,6 +16,7 @@
 
 #include <google/protobuf/message.h>
 #include <zlib.h>
+#include <absl/log/check.h>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -109,7 +110,7 @@ int ProtobufCodecLite::serializeToBuffer(const google::protobuf::Message& messag
   // return static_cast<int>(os.ByteCount());
 
   // code copied from MessageLite::SerializeToArray() and MessageLite::SerializePartialToArray().
-  GOOGLE_DCHECK(message.IsInitialized()) << InitializationErrorMessage("serialize", message);
+  ABSL_DCHECK(message.IsInitialized()) << InitializationErrorMessage("serialize", message);
 
   /**
    * 'ByteSize()' of message is deprecated in Protocol Buffers v3.4.0 firstly. But, till to v3.11.0, it just getting start to be marked by '__attribute__((deprecated()))'.

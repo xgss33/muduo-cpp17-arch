@@ -1,5 +1,5 @@
 add_library(protobuf_codec codec.cc)
-target_link_libraries(protobuf_codec protobuf muduo_net z)
+target_link_libraries(protobuf_codec protobuf muduo_net z absl_log_internal_check_op absl_log_internal_message)
 
 add_custom_command(OUTPUT query.pb.cc query.pb.h
   COMMAND protoc

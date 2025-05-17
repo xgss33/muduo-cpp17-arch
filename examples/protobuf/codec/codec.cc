@@ -24,13 +24,13 @@ void ProtobufCodec::fillEmptyBuffer(Buffer* buf, const google::protobuf::Message
   // buf->retrieveAll();
   assert(buf->readableBytes() == 0);
 
-  const std::string& typeName = message.GetTypeName();
+  std::string typeName(message.GetTypeName());
   int32_t nameLen = static_cast<int32_t>(typeName.size()+1);
   buf->appendInt32(nameLen);
   buf->append(typeName.c_str(), nameLen);
 
   // code copied from MessageLite::SerializeToArray() and MessageLite::SerializePartialToArray().
-  GOOGLE_DCHECK(message.IsInitialized()) << InitializationErrorMessage("serialize", message);
+  ABSL_DCHECK(message.IsInitialized()) << InitializationErrorMessage("serialize", message);
 
   /**
    * 'ByteSize()' of message is deprecated in Protocol Buffers v3.4.0 firstly. But, till to v3.11.0, it just getting start to be marked by '__attribute__((deprecated()))'.

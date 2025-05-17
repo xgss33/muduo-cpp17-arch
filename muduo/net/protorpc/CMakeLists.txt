@@ -15,7 +15,7 @@ set_target_properties(muduo_protorpc_wire PROPERTIES COMPILE_FLAGS "-Wno-error=s
 
 if(NOT CMAKE_BUILD_NO_EXAMPLES)
 add_executable(protobuf_rpc_wire_test RpcCodec_test.cc)
-target_link_libraries(protobuf_rpc_wire_test muduo_protorpc_wire muduo_protobuf_codec)
+target_link_libraries(protobuf_rpc_wire_test muduo_protorpc_wire muduo_protobuf_codec absl_log_internal_check_op absl_log_internal_message)
 set_target_properties(protobuf_rpc_wire_test PROPERTIES COMPILE_FLAGS "-Wno-error=shadow")
 endif()
 

@@ -8,6 +8,8 @@
 
 #include <muduo/net/protorpc/RpcServer.h>
 
+#include <string>
+
 #include <muduo/base/Logging.h>
 #include <muduo/net/protorpc/RpcChannel.h>
 
@@ -30,7 +32,7 @@ RpcServer::RpcServer(EventLoop* loop,
 void RpcServer::registerService(google::protobuf::Service* service)
 {
   const google::protobuf::ServiceDescriptor* desc = service->GetDescriptor();
-  services_[desc->full_name()] = service;
+  services_[std::string(desc->full_name())] = service;
 }
 
 void RpcServer::start()
